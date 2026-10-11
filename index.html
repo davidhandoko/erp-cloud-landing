@@ -19,10 +19,10 @@
       <span>ERP Cloud</span>
     </a>
     <nav aria-label="Navigasi utama">
+      <a href="#mengapa">Mengapa</a>
       <a href="#industri">Industri</a>
       <a href="#demo">Demo</a>
       <a href="#batas">Status fitur</a>
-      <a href="#harga">Early Access</a>
     </nav>
     <a class="button button-small" href="#minat">Minta demo</a>
   </header>
@@ -68,6 +68,41 @@
         <span>Status fitur jujur</span><span>Akses per tenant/outlet</span>
         <span>Riwayat dapat ditelusuri</span><span>Ekspor terdokumentasi</span>
       </div>
+    </section>
+
+    <section class="section shell" id="mengapa">
+      <p class="eyebrow">Mengapa ERP Cloud?</p>
+      <h2>Operasional yang lebih mudah ditelusuri, bukan sekadar layar kasir.</h2>
+      <p class="section-intro">ERP Cloud dirancang agar transaksi, perubahan,
+        dan ringkasan pemilik tetap terhubung pada riwayat yang sama. Fokusnya
+        adalah alur operasional yang dapat diperiksa—dengan batas produk yang
+        disebutkan sejak awal.</p>
+      <div class="value-grid">
+        <article>
+          <span>01</span>
+          <h3>Perubahan transaksi tercatat dan dapat ditelusuri</h3>
+          <p>Pemilik dapat menelusuri harga final, struk, koreksi, return, dan
+            refund. Perubahan dicatat sebagai kejadian baru agar asal angkanya
+            tetap dapat diperiksa.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>Satu alur dari kasir sampai ringkasan pemilik</h3>
+          <p>Cafe/Resto dapat mengikuti order, dapur, pembayaran, dan shift.
+            Retail dapat mengikuti checkout, stok, return/refund, dan laporan
+            dari transaksi yang sama.</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>Tahu yang siap didemokan—dan yang belum</h3>
+          <p>Fitur aktif dipisahkan dari roadmap agar pemilik usaha dapat menilai
+            kecocokan sejak awal. Demo memakai data sintetis; deployment
+            produksi dan validasi pelanggan memerlukan keputusan terpisah.</p>
+        </article>
+      </div>
+      <p class="evidence-note">Pernyataan ini didukung desain, implementasi,
+        dan pengujian repository. Itu belum merupakan bukti penggunaan
+        produksi, hasil bisnis pelanggan, atau production GO.</p>
     </section>
 
     <section class="section shell" id="industri">
@@ -153,8 +188,8 @@
         </article>
       </div>
       <p class="boundary-note">Pilot tetap memerlukan provider pre-flight,
-        pengujian isolasi deployment aktual, dan keputusan production GO terpisah.
-        ERP Cloud tidak mengklaim RLS menyeluruh untuk seluruh tabel bisnis.</p>
+        verifikasi pemisahan akses antar usaha dan outlet pada deployment aktual,
+        serta keputusan production GO terpisah.</p>
     </section>
 
     <section class="section price-section" id="harga">
@@ -185,8 +220,9 @@
       <p class="eyebrow">Pertanyaan umum</p>
       <h2>Transparan sebelum demo.</h2>
       <details><summary>Apakah ERP Cloud sudah bisa dipakai publik?</summary><p>Belum. Landing page ini sudah publik, tetapi produk masih tahap Early Access dan hanya dapat didemokan dengan data sintetis. Pendaftaran, pengumpulan lead, provider pre-flight, dan production GO memerlukan persetujuan terpisah.</p></details>
+      <details><summary>Mengapa mempertimbangkan ERP Cloud jika sudah banyak POS atau ERP lain?</summary><p>ERP Cloud tidak mengklaim memiliki fitur paling banyak. Produk ini layak dipertimbangkan untuk pilot terkontrol yang mengutamakan riwayat operasional yang dapat ditelusuri, batas fitur yang jujur, dan perbaikan bersama pengguna awal. Jika kebutuhan utama Anda adalah akuntansi lengkap, offline/native, marketplace, loyalty, atau purchasing, produk lain yang sudah menyediakan fungsi tersebut kemungkinan lebih sesuai saat ini.</p></details>
       <details><summary>Mengapa menyebut multi-industri jika fokusnya Cafe/Resto?</summary><p>Fondasi tenant, outlet, transaksi dan kontrol operasional dipakai lintas vertikal. Cafe/Resto adalah fokus Early Access, Retail/POS adalah demo sekunder, sedangkan Distributor dan industri lain tidak dipresentasikan sebagai fitur aktif.</p></details>
-      <details><summary>Apakah data antar usaha dijamin oleh RLS penuh?</summary><p>Tidak ada klaim itu. Desain memakai konteks tenant/outlet dari server, query scoping, guard relasi database, tes adversarial, dan role runtime terbatas. Hanya tabel proof khusus yang memakai FORCE RLS; deployment aktual tetap wajib diuji.</p></details>
+      <details><summary>Bagaimana akses antar usaha dan outlet dipisahkan?</summary><p>Akses diatur berdasarkan usaha, outlet, dan peran pengguna. Pemisahan ini diuji di repository, tetapi tetap harus diverifikasi kembali pada lingkungan pilot yang sebenarnya sebelum production GO.</p></details>
       <details><summary>Bisakah membayar sekarang?</summary><p>Tidak. Pendaftaran dan pembayaran belum aktif. Landing page ini tidak menerima order, pembayaran, atau komitmen produksi.</p></details>
     </section>
 
