@@ -1,9 +1,9 @@
 # Phase 3M-L landing-page launch artifact
 
-This is a self-contained, review-only static site. It has no active form
-endpoint, analytics, cookies, browser persistence, external runtime assets or
-network call. It must not be published until the independent architect accepts
-the repository work and the owner separately authorizes public publication.
+This is the canonical source for the public static Early Access landing page at
+`https://erp.metabrain.cloud/`. It has no active form endpoint, analytics,
+cookies, browser persistence, external runtime assets or network call. Product
+registration, payment, lead collection and outreach remain inactive.
 
 Preview locally:
 
@@ -11,7 +11,7 @@ Preview locally:
 python -m http.server 8080 --directory marketing/site
 ~~~
 
-Then open `http://127.0.0.1:8080`. Local preview is not a production
+Then open `http://127.0.0.1:8080`. Local preview is not an ERP production
 deployment. All depicted names, users, figures and transactions are synthetic.
 
 Run the static contract:
@@ -28,13 +28,13 @@ python marketing/scripts/build_pages.py --output "$pages_dir"
 (cd "$pages_dir" && sha256sum --check SHA256SUMS)
 ~~~
 
-The recommended free target is a separate public deploy-only repository,
-`davidhandoko/erp-cloud-landing`, at
-`https://davidhandoko.github.io/erp-cloud-landing/`. Never make the private
+The deployment target is the separate public deploy-only repository
+`davidhandoko/erp-cloud-landing`, published by GitHub Pages from `main`/root
+with custom domain `https://erp.metabrain.cloud/`. Never make the private
 application repository public and never copy Django source, configuration,
 secrets, dumps or customer data into the deploy repository.
 
-Publication and lead collection are distinct gates. The first approved public
+Publication and lead collection remain distinct gates. The public static
 release keeps the form disabled. Form activation additionally requires an
 approved controller/contact, privacy notice, processor, retention/deletion
 procedure, named operator, test deletion, and explicit owner authorization.

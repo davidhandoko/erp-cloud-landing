@@ -11,7 +11,7 @@
 </head>
 <body>
   <div class="review-banner" role="status">
-    PREVIEW REVIEW — bukan situs publik, formulir nonaktif, tidak menerima data atau pembayaran
+    EARLY ACCESS — demo memakai data sintetis; pendaftaran dan pembayaran belum aktif
   </div>
   <header class="nav shell">
     <a class="brand" href="#top" aria-label="ERP Cloud">
@@ -40,8 +40,8 @@
           <a class="button" href="#minat">Tinjau Early Access</a>
           <a class="text-link" href="#industri">Periksa status industri →</a>
         </div>
-        <p class="micro">Belum dibuka untuk publik. Preview ini tidak mengirim,
-          menyimpan, atau menganalisis data pengunjung.</p>
+        <p class="micro">Produk masih tahap Early Access. Landing page ini tidak
+          mengirim data melalui formulir dan tidak menggunakan analytics.</p>
       </div>
       <div class="hero-card" aria-label="Ringkasan outlet demo sintetis">
         <div class="card-top">
@@ -164,7 +164,7 @@
           <h2>Mulai kecil. Ukur manfaatnya.</h2>
           <p>Harga diuji hanya untuk percakapan discovery Cafe/Resto. Ketentuan
             pajak, dukungan, refund, annual term, dan biaya di luar paket belum
-            disetujui. Tidak ada pembayaran yang diterima dalam Phase 3M-L.</p>
+            disetujui. Pendaftaran dan pembayaran belum aktif.</p>
         </div>
         <article class="price-card">
           <p>CAFE · 1 OUTLET · MAKS. 5 USER</p>
@@ -184,10 +184,10 @@
     <section class="section shell faq">
       <p class="eyebrow">Pertanyaan umum</p>
       <h2>Transparan sebelum demo.</h2>
-      <details><summary>Apakah ERP Cloud sudah bisa dipakai publik?</summary><p>Belum. Kapabilitas repository dapat didemokan, tetapi publikasi landing page, pengumpulan lead, provider pre-flight, dan production GO adalah persetujuan yang berbeda.</p></details>
+      <details><summary>Apakah ERP Cloud sudah bisa dipakai publik?</summary><p>Belum. Landing page ini sudah publik, tetapi produk masih tahap Early Access dan hanya dapat didemokan dengan data sintetis. Pendaftaran, pengumpulan lead, provider pre-flight, dan production GO memerlukan persetujuan terpisah.</p></details>
       <details><summary>Mengapa menyebut multi-industri jika fokusnya Cafe/Resto?</summary><p>Fondasi tenant, outlet, transaksi dan kontrol operasional dipakai lintas vertikal. Cafe/Resto adalah fokus Early Access, Retail/POS adalah demo sekunder, sedangkan Distributor dan industri lain tidak dipresentasikan sebagai fitur aktif.</p></details>
       <details><summary>Apakah data antar usaha dijamin oleh RLS penuh?</summary><p>Tidak ada klaim itu. Desain memakai konteks tenant/outlet dari server, query scoping, guard relasi database, tes adversarial, dan role runtime terbatas. Hanya tabel proof khusus yang memakai FORCE RLS; deployment aktual tetap wajib diuji.</p></details>
-      <details><summary>Bisakah membayar sekarang?</summary><p>Tidak. Phase 3M-L menyiapkan launch gate dan eksperimen discovery. Tidak ada order, pembayaran, atau komitmen produksi yang diterima.</p></details>
+      <details><summary>Bisakah membayar sekarang?</summary><p>Tidak. Pendaftaran dan pembayaran belum aktif. Landing page ini tidak menerima order, pembayaran, atau komitmen produksi.</p></details>
     </section>
 
     <section class="section shell" id="minat">
@@ -226,16 +226,16 @@
           </label>
           <button class="button" type="submit" disabled>Formulir belum aktif</button>
         </form>
-        <p class="form-status" id="form-status" aria-live="polite">Tidak ada data yang dikumpulkan dalam preview ini.</p>
+        <p class="form-status" id="form-status" aria-live="polite">Tidak ada data yang dikumpulkan melalui formulir landing page ini.</p>
       </div>
     </section>
   </main>
 
   <footer>
     <div class="shell footer-grid">
-      <div><b>ERP Cloud</b><p>Preview Phase 3M-L untuk independent architect review.</p></div>
-      <div><b>Status</b><p>Bukan production · bukan penawaran publik · tanpa lead collection.</p></div>
-      <div><b>Privasi</b><p><a href="privacy.html">Baca notis preview dan draft aktivasi</a></p></div>
+      <div><b>ERP Cloud</b><p>Landing statis untuk pengenalan Early Access.</p></div>
+      <div><b>Status</b><p>Produk Early Access · demo data sintetis · pendaftaran dan pembayaran belum aktif.</p></div>
+      <div><b>Privasi</b><p><a href="privacy.html">Baca notis privasi dan batas aktivasi</a></p></div>
     </div>
   </footer>
   <script src="app.js"></script>
