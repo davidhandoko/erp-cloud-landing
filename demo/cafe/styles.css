@@ -175,6 +175,8 @@ button:disabled { cursor: not-allowed; opacity: .5; box-shadow: none; }
 .legend { display: grid; gap: 12px; font-size: 11px; }
 .legend-row { display: grid; grid-template-columns: 9px 1fr; gap: 9px; align-items: start; }
 .legend-row i { width: 9px; height: 9px; margin-top: 3px; border-radius: 50%; }
+.legend-cash { background: var(--green); }
+.legend-qris { background: var(--orange); }
 .legend-row strong, .legend-row span { display: block; }
 .legend-row span { color: var(--muted); }
 .top-items { display: grid; gap: 13px; }

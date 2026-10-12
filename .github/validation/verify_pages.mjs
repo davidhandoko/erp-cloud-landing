@@ -27,11 +27,15 @@ const server = createServer(async (req, res) => {
 await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
 const origin = `http://127.0.0.1:${server.address().port}`;
 const browser = await chromium.launch({ executablePath: process.env.CHROME_PATH || undefined, args: ['--no-sandbox'] });
-const report = { staticOnly: true, scenarios: [], requestCount: 0, externalRequests: [], pageErrors: [], failedAssets: [] };
+const report = { staticOnly: true, scenarios: [], requestCount: 0, externalRequests: [], pageErrors: [], failedAssets: [], cspViolations: [] };
 try {
   for (const prefix of ['/', '/erp-cloud-landing/']) {
     for (const viewport of [{ width: 1440, height: 1050 }, { width: 390, height: 844 }]) {
       const context = await browser.newContext({ viewport, reducedMotion: 'reduce' });
+      await context.addInitScript(() => {
+        window.__testCspViolations = [];
+        document.addEventListener('securitypolicyviolation', event => window.__testCspViolations.push(event.effectiveDirective));
+      });
       const page = await context.newPage();
       page.on('pageerror', error => report.pageErrors.push(error.message));
       page.on('request', request => {
@@ -65,8 +69,10 @@ try {
       assert.equal(new URL(page.url()).pathname, prefix + 'demo/cafe/');
       assert.equal(await page.locator('.demo-disclosure').isVisible(), true);
       // Keyboard-only activation of a business action.
+      await page.locator('#order-items .order-item').first().waitFor({ state: 'visible' });
       await page.locator('#confirm-order').focus();
       await page.keyboard.press('Enter');
+      await page.locator('[data-panel="2"]').waitFor({ state: 'visible' });
       assert.equal(await page.locator('[data-panel="2"]').isVisible(), true);
       await page.locator('#reset-demo').click();
       for (const scenario of ['direct-payment', 'early-shift', 'paid-open', 'reset-replay', 'journey']) {
@@ -81,6 +87,12 @@ try {
       await page.goto(origin + prefix + 'demo/cafe/?review=owner');
       assert.equal(await page.locator('#context-status').innerText(), 'CLOSED');
       assert.equal(await page.locator('#receipt').getAttribute('hidden'), null);
+      const heights = await page.locator('#sales-chart .bar').evaluateAll(bars => bars.map(bar => bar.getBoundingClientRect().height));
+      assert.ok(Math.max(...heights) > 100, 'trend chart must have meaningful bar height');
+      assert.ok(new Set(heights.map(Math.round)).size > 1, 'trend bar heights must vary with fixture values');
+      const widths = await page.locator('#top-items .item-track span').evaluateAll(bars => bars.map(bar => bar.style.width));
+      assert.ok(new Set(widths).size > 1, 'top-item bar widths must vary');
+      report.cspViolations.push(...await page.evaluate(() => window.__testCspViolations));
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
       assert.equal(await context.cookies().then(x => x.length), 0);
       assert.deepEqual(await page.evaluate(() => [localStorage.length, sessionStorage.length]), [0, 0]);
@@ -101,6 +113,7 @@ try {
   assert.deepEqual(report.externalRequests, []);
   assert.deepEqual(report.pageErrors, []);
   assert.deepEqual(report.failedAssets, []);
+  assert.deepEqual(report.cspViolations, []);
   report.result = 'PASS';
   await writeFile(path.join(evidence, 'browser-report.json'), JSON.stringify(report, null, 2) + '\n');
   console.log(JSON.stringify(report, null, 2));

@@ -34,7 +34,9 @@ requires refreshing the destination PR and review, not automatic publication.
 | 404 | exact-hash-authorized inline recovery selects root or `/erp-cloud-landing/` for CSS/home navigation even at nested missing URLs |
 | Business state | unchanged OPEN → PAID while OPEN → explicit CLOSED → receipt/final-sales → shift close |
 
-`demo/cafe/app.js` and `fixtures.js` are unchanged from source main. No Django
+`demo/cafe/fixtures.js` is unchanged from source main. The static chart renderer
+now uses DOM style properties and stylesheet classes instead of CSP-blocked
+inline HTML styles; the formulas and transaction state machine are unchanged. No Django
 domain, calculation, feature availability, or data collection was altered.
 
 ## Exact artifact and preservation policy

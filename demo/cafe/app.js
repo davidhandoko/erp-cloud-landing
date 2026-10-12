@@ -278,15 +278,18 @@
     const maxTrend = Math.max(...trend.map((item) => item.value));
     $("#sales-chart").innerHTML = trend.map((item, index) => `
       <div class="bar-group ${index === trend.length - 1 ? "is-today" : ""}" title="${item.label}: ${rupiah(item.value)}">
-        <span class="bar" style="height:${Math.max(4, Math.round(item.value / maxTrend * 100))}%"></span><small>${item.label}</small>
+        <span class="bar"></span><small>${item.label}</small>
       </div>`).join("");
+    $$("#sales-chart .bar").forEach((bar, index) => {
+      bar.style.height = `${Math.max(4, Math.round(trend[index].value / maxTrend * 100))}%`;
+    });
 
     const cashPercent = Math.round(values.cash / values.payable * 100);
     $("#payment-donut").style.background = `conic-gradient(var(--green) 0 ${cashPercent}%, var(--orange) ${cashPercent}% 100%)`;
     $("#payment-donut").setAttribute("aria-label", `Pembayaran tunai ${cashPercent} persen dan QRIS ${100 - cashPercent} persen`);
     $("#payment-legend").innerHTML = `
-      <div class="legend-row"><i style="background:var(--green)"></i><div><strong>Tunai · ${cashPercent}%</strong><span>${rupiah(values.cash)}</span></div></div>
-      <div class="legend-row"><i style="background:var(--orange)"></i><div><strong>QRIS · ${100 - cashPercent}%</strong><span>${rupiah(values.qris)}</span></div></div>`;
+      <div class="legend-row"><i class="legend-cash"></i><div><strong>Tunai · ${cashPercent}%</strong><span>${rupiah(values.cash)}</span></div></div>
+      <div class="legend-row"><i class="legend-qris"></i><div><strong>QRIS · ${100 - cashPercent}%</strong><span>${rupiah(values.qris)}</span></div></div>`;
 
     const items = fixture.dashboardBeforeOrder.topItems.map((item) => ({ ...item }));
     if (state.saleClosed) {
@@ -301,8 +304,11 @@
     $("#owner-gate").hidden = state.saleClosed;
     const maxItem = Math.max(...items.map((item) => item.netSales));
     $("#top-items").innerHTML = items.map((item) => `
-      <div class="top-item"><strong>${item.name}<small>${item.quantity} item</small></strong><div class="item-track"><span style="width:${Math.round(item.netSales / maxItem * 100)}%"></span></div><span>${rupiah(item.netSales)}</span></div>
+      <div class="top-item"><strong>${item.name}<small>${item.quantity} item</small></strong><div class="item-track"><span></span></div><span>${rupiah(item.netSales)}</span></div>
     `).join("");
+    $$("#top-items .item-track span").forEach((bar, index) => {
+      bar.style.width = `${Math.round(items[index].netSales / maxItem * 100)}%`;
+    });
   }
 
   function renderAudit() {
