@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="application-name" content="metabrain">
+  <meta name="theme-color" content="#176b51">
+  <meta name="description" content="Demo interaktif sintetis Cafe/Resto metabrain, tanpa backend, pembayaran, atau transaksi nyata.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="id_ID">
+  <meta property="og:title" content="Demo Cafe/Resto Sintetis — metabrain">
+  <meta property="og:description" content="Ikuti alur pesanan, dapur, pembayaran, shift, dan ringkasan pemilik dengan data sintetis.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'; object-src 'none'; frame-ancestors 'none'">
+  <title>Demo Cafe/Resto Sintetis — metabrain</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#demo-workspace">Lewati ke demo</a>
+  <div class="demo-disclosure" role="status">
+    DEMO SINTETIS · tidak terhubung ke backend, pembayaran, atau data pelanggan
+  </div>
+
+  <header class="topbar">
+    <a class="brand" href="../../index.html" aria-label="metabrain — Cloud ERP untuk Bisnis; kembali ke halaman utama">
+      <span class="brand-mark" aria-hidden="true">m</span>
+      <span><strong>metabrain</strong><small>Cloud ERP untuk Bisnis</small></span>
+    </a>
+    <div class="outlet-context" aria-label="Konteks outlet sintetis">
+      <span class="live-dot" aria-hidden="true"></span>
+      <span><strong id="outlet-name">Kedai Nusa Sintetis</strong><small>Data simulasi · Jakarta</small></span>
+    </div>
+  </header>
+
+  <main id="demo-workspace" class="workspace">
+    <section class="intro-panel" aria-labelledby="demo-title">
+      <div>
+        <p class="eyebrow">Demo interaktif Cafe/Resto · data sintetis</p>
+        <h1 id="demo-title">Ikuti satu pesanan, dari kasir sampai ringkasan pemilik.</h1>
+        <p class="intro-copy">Klik setiap langkah untuk melihat bagaimana order, dapur, pembayaran, shift, dan laporan saling terhubung. Seluruh nama dan angka di halaman ini dibuat khusus untuk simulasi.</p>
+      </div>
+      <aside class="benefit-callout" aria-label="Tujuan demo">
+        <span aria-hidden="true">↗</span>
+        <p><strong>Fokus manfaat</strong> Pemilik dapat memahami status operasional dan menelusuri asal angka tanpa melihat istilah teknis.</p>
+      </aside>
+    </section>
+
+    <nav class="journey-nav" aria-label="Tahapan demo Cafe/Resto">
+      <ol id="step-list">
+        <li><button type="button" class="step-button is-active" data-step="1" aria-current="step"><span>01</span><b>Pesanan</b><small>Dine-in / takeaway</small></button></li>
+        <li><button type="button" class="step-button" data-step="2"><span>02</span><b>Dapur</b><small>Kirim & siapkan</small></button></li>
+        <li><button type="button" class="step-button" data-step="3"><span>03</span><b>Pembayaran</b><small>Hitung & struk</small></button></li>
+        <li><button type="button" class="step-button" data-step="4"><span>04</span><b>Shift</b><small>Kas & selisih</small></button></li>
+        <li><button type="button" class="step-button" data-step="5"><span>05</span><b>Pemilik</b><small>Ringkasan usaha</small></button></li>
+        <li><button type="button" class="step-button" data-step="6"><span>06</span><b>Jejak</b><small>Apa yang tercatat</small></button></li>
+      </ol>
+    </nav>
+
+    <div class="stage-shell">
+      <aside class="context-rail" aria-label="Ringkasan transaksi simulasi">
+        <div class="context-card">
+          <p class="label">Pesanan simulasi</p>
+          <strong id="order-number">ORD-DEMO-1042</strong>
+          <dl>
+            <div><dt>Layanan</dt><dd id="context-service">Dine-in</dd></div>
+            <div><dt>Lokasi</dt><dd id="context-location">Meja 07</dd></div>
+            <div><dt>Status</dt><dd><span id="context-status" class="pill pill-open">OPEN</span></dd></div>
+            <div><dt>Total</dt><dd id="context-total">Rp115.500</dd></div>
+          </dl>
+        </div>
+        <div class="explain-card">
+          <p class="label">Yang dipahami pemilik</p>
+          <p id="business-explanation">Pesanan dicatat satu kali dan menjadi sumber untuk proses berikutnya.</p>
+        </div>
+        <button id="reset-demo" class="text-button" type="button">↻ Ulangi demo</button>
+      </aside>
+
+      <section class="stage" aria-live="polite" aria-atomic="false">
+        <article class="step-panel is-visible" data-panel="1" aria-labelledby="step-1-title">
+          <div class="panel-heading">
+            <div><p class="eyebrow">Langkah 1 · Kasir</p><h2 id="step-1-title">Terima pesanan</h2></div>
+            <span class="role-badge">Kasir Demo</span>
+          </div>
+          <div class="mode-toggle" role="group" aria-label="Pilih jenis layanan simulasi">
+            <button type="button" class="mode-button is-selected" data-mode="DINE_IN" aria-pressed="true">Dine-in · Meja 07</button>
+            <button type="button" class="mode-button" data-mode="TAKEAWAY" aria-pressed="false">Takeaway · Ambil sendiri</button>
+          </div>
+          <div class="order-layout">
+            <div>
+              <div class="section-label"><span>Isi pesanan</span><span>Harga snapshot</span></div>
+              <div id="order-items" class="order-items"></div>
+            </div>
+            <aside class="order-summary">
+              <h3>Ringkasan</h3>
+              <div id="pricing-lines"></div>
+              <div class="summary-total"><span>Total bayar</span><strong id="payable-total">Rp115.500</strong></div>
+              <button id="confirm-order" type="button" class="primary-button">Konfirmasi & lanjut ke dapur</button>
+              <p class="microcopy">Simulasi saja—tidak membuat transaksi ERP nyata.</p>
+            </aside>
+          </div>
+        </article>
+
+        <article class="step-panel" data-panel="2" aria-labelledby="step-2-title" hidden>
+          <div class="panel-heading">
+            <div><p class="eyebrow">Langkah 2 · Operasional</p><h2 id="step-2-title">Kirim item ke dapur dan bar</h2></div>
+            <span id="kitchen-overall" class="pill pill-queued">Belum dikirim</span>
+          </div>
+          <p class="panel-copy">Satu pesanan dapat diarahkan ke stasiun yang berbeda. Status persiapan tidak mengubah status order secara diam-diam.</p>
+          <p id="kitchen-gate" class="gate-notice"><strong>Belum dapat dikirim:</strong> konfirmasi pesanan pada langkah 1 terlebih dahulu. Anda tetap dapat melihat halaman ini untuk memahami alurnya.</p>
+          <div id="kitchen-board" class="kitchen-board"></div>
+          <div class="action-row">
+            <button id="send-kitchen" type="button" class="primary-button">Kirim ke dapur & bar</button>
+            <button id="advance-kitchen" type="button" class="secondary-button" disabled>Majukan semua status</button>
+          </div>
+          <div class="benefit-strip"><strong>Manfaat:</strong> Kasir dan dapur melihat sumber pesanan yang sama, sementara progres persiapan tetap jelas.</div>
+        </article>
+
+        <article class="step-panel" data-panel="3" aria-labelledby="step-3-title" hidden>
+          <div class="panel-heading">
+            <div><p class="eyebrow">Langkah 3 · Finance</p><h2 id="step-3-title">Bayar, lalu tutup transaksi secara eksplisit</h2></div>
+            <span id="payment-state" class="pill pill-open">UNPAID</span>
+          </div>
+          <p id="payment-gate" class="gate-notice"><strong>Pembayaran belum dapat dicatat:</strong> konfirmasi pesanan pada langkah 1. Navigasi tetap terbuka agar urutan proses dapat dieksplorasi.</p>
+          <div class="payment-layout">
+            <section class="payment-card" aria-labelledby="payment-breakdown-title">
+              <h3 id="payment-breakdown-title">Perhitungan transparan</h3>
+              <div id="payment-breakdown"></div>
+              <p class="formula-note">Diskon, service, dan pajak dihitung dari fixture sintetis dengan bilangan rupiah utuh.</p>
+            </section>
+            <section class="payment-card" aria-labelledby="payment-method-title">
+              <h3 id="payment-method-title">Pembayaran bertahap</h3>
+              <div id="payment-entries" class="payment-entries"></div>
+              <button id="record-payment" type="button" class="primary-button">Catat pembayaran berikutnya</button>
+              <p id="payment-hint" class="microcopy">Mulai dengan QRIS simulasi Rp80.000.</p>
+            </section>
+          </div>
+          <section class="close-card" aria-labelledby="close-transaction-title">
+            <div><p class="label">Finalisasi transaksi</p><h3 id="close-transaction-title">PAID belum berarti CLOSED</h3><p id="close-hint">Pelunasan penuh diperlukan sebelum transaksi dapat ditutup.</p></div>
+            <button id="close-transaction" type="button" class="primary-button" disabled>Tutup transaksi & finalisasi struk</button>
+          </section>
+          <section id="receipt" class="receipt" aria-labelledby="receipt-title" hidden>
+            <div class="receipt-head"><div><p>METABRAIN · DEMO</p><h3 id="receipt-title">Struk simulasi</h3></div><span>BUKAN BUKTI BAYAR</span></div>
+            <div id="receipt-body"></div>
+          </section>
+        </article>
+
+        <article class="step-panel" data-panel="4" aria-labelledby="step-4-title" hidden>
+          <div class="panel-heading">
+            <div><p class="eyebrow">Langkah 4 · Penutupan kasir</p><h2 id="step-4-title">Periksa ringkasan shift</h2></div>
+            <span id="shift-state" class="pill pill-open">OPEN</span>
+          </div>
+          <div id="shift-metrics" class="metric-grid"></div>
+          <div class="reconciliation-card">
+            <div><p class="label">Rumus kas fisik</p><p>Kas awal + pembayaran tunai − koreksi tunai</p></div>
+            <div class="reconciliation-flow" id="reconciliation-flow"></div>
+          </div>
+          <button id="close-shift" type="button" class="primary-button">Tutup shift simulasi</button>
+          <p id="shift-hint" class="gate-hint">Tutup transaksi berbayar terlebih dahulu sebelum menutup shift simulasi.</p>
+          <div id="variance-note" class="benefit-strip" hidden></div>
+        </article>
+
+        <article class="step-panel" data-panel="5" aria-labelledby="step-5-title" hidden>
+          <div class="panel-heading">
+            <div><p class="eyebrow">Langkah 5 · Pemilik</p><h2 id="step-5-title">Lihat hasil usaha hari ini</h2></div>
+            <span class="role-badge">18 transaksi sintetis</span>
+          </div>
+          <p id="owner-gate" class="gate-notice"><strong>Transaksi demo belum masuk angka final:</strong> pembayaran saja tidak cukup. Dashboard baru menambahkan order ini setelah statusnya CLOSED.</p>
+          <div id="owner-kpis" class="owner-kpis"></div>
+          <div class="dashboard-grid">
+            <section class="chart-card" aria-labelledby="trend-title">
+              <div class="chart-heading"><div><p class="label">Penjualan terbayar</p><h3 id="trend-title">Tren 7 hari</h3></div><span>Data simulasi</span></div>
+              <div id="sales-chart" class="sales-chart" role="img" aria-label="Grafik batang penjualan terbayar sintetis selama tujuh hari"></div>
+            </section>
+            <section class="chart-card" aria-labelledby="mix-title">
+              <div class="chart-heading"><div><p class="label">Metode pembayaran</p><h3 id="mix-title">Campuran pembayaran</h3></div></div>
+              <div class="mix-layout"><div id="payment-donut" class="donut" role="img"></div><div id="payment-legend" class="legend"></div></div>
+            </section>
+            <section class="chart-card span-two" aria-labelledby="top-items-title">
+              <div class="chart-heading"><div><p class="label">Berdasarkan transaksi final</p><h3 id="top-items-title">Menu teratas</h3></div><span>Snapshot nama & nilai</span></div>
+              <div id="top-items" class="top-items"></div>
+            </section>
+          </div>
+          <div class="benefit-strip"><strong>Manfaat:</strong> pemilik melihat transaksi final, pembayaran, dan shift secara terpisah tetapi tetap dapat menelusuri sumber angkanya.</div>
+        </article>
+
+        <article class="step-panel" data-panel="6" aria-labelledby="step-6-title" hidden>
+          <div class="panel-heading">
+            <div><p class="eyebrow">Langkah 6 · Ringkasan</p><h2 id="step-6-title">Apa yang tercatat dan dapat ditelusuri?</h2></div>
+            <span id="completion-state" class="pill pill-queued">Eksplorasi · belum selesai</span>
+          </div>
+          <div id="audit-timeline" class="audit-timeline"></div>
+          <div class="boundary-card">
+            <div><p class="label">Sudah dapat didemokan</p><ul><li>Dine-in/takeaway dan item snapshot</li><li>Pengiriman serta progres dapur</li><li>Pricing, split payment, struk, shift, dan laporan pemilik</li></ul></div>
+            <div><p class="label">Tidak diklaim tersedia</p><ul><li>Backend live atau transaksi pelanggan</li><li>Payment gateway / QRIS otomatis</li><li>Resep, konsumsi bahan, HPP/AVCO, dan accounting</li><li>Offline/native POS, loyalty, dan marketplace</li></ul></div>
+          </div>
+          <div class="completion-card">
+            <p class="eyebrow">Kesimpulan demo</p>
+            <h3>Satu alur operasional, dengan batas produk yang disebutkan sejak awal.</h3>
+            <p>Demo ini membantu menilai kecocokan workflow. Demo bukan bukti penggunaan produksi, validasi pelanggan, atau production GO.</p>
+            <button id="restart-demo" type="button" class="secondary-button">Ulangi dari awal</button>
+          </div>
+        </article>
+
+        <div class="stage-footer">
+          <button id="previous-step" type="button" class="text-button" disabled>← Sebelumnya</button>
+          <p id="step-status" class="step-status">Langkah 1 dari 6</p>
+          <button id="next-step" type="button" class="secondary-button">Berikutnya →</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <p><strong>metabrain</strong> · Demo sintetis tanpa backend ERP atau pembayaran nyata.</p>
+    <p>Semua nama, angka, nomor order, pengguna, dan transaksi di halaman ini sintetis.</p>
+  </footer>
+
+  <script src="fixtures.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

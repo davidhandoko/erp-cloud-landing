@@ -1,0 +1,14 @@
+{
+  "contract": "davidhandoko/erp-cloud#40",
+  "source_repository": "davidhandoko/erp-cloud",
+  "source_main": "88750e1cc8940f9a818a71f8ab609e33ac401fda",
+  "source_feature_head": "0e6d93a789fa57d0357ab01b9484c40f9c07ba5b",
+  "source_pr": "https://github.com/davidhandoko/erp-cloud/pull/41",
+  "destination_main": "621630225d8d7e59fcda880f39e6410f8c044051",
+  "runtime_manifest_sha256": "6cd8f92e43db427cf6dc41b7a223a9128d1739192041110e026b45ce43a9008c",
+  "runtime_files": 13,
+  "publication_authorized": false,
+  "domain_settings_changed": false,
+  "early_access_form": "disabled",
+  "source_dependency": "Review and merge source PR #41, then rebuild resolved main and compare runtime hashes before separately authorized destination publication."
+}

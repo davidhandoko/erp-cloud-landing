@@ -3,17 +3,28 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'; object-src 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'sha256-8R1ZdN6TvRqnO+s4INPKrzEFj6dACBh3bwp/gNtvDmA='; img-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'; object-src 'none'">
   <meta name="referrer" content="no-referrer">
   <meta name="robots" content="noindex">
-  <title>Halaman tidak ditemukan — ERP Cloud</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta name="application-name" content="metabrain">
+  <meta name="theme-color" content="#176b51">
+  <title>Halaman tidak ditemukan — metabrain</title>
 </head>
 <body>
   <main class="legal shell">
     <p class="eyebrow">404</p>
     <h1>Halaman tidak ditemukan.</h1>
-    <p><a class="button" href="index.html">Kembali ke ERP Cloud</a></p>
+    <p><a id="home-link" class="button" href="index.html">Kembali ke metabrain</a></p>
   </main>
+<script>
+    (() => {
+      const base = location.pathname.startsWith("/erp-cloud-landing/") ? "/erp-cloud-landing/" : "/";
+      document.getElementById("home-link").href = base + "index.html";
+      const css = document.createElement("link");
+      css.rel = "stylesheet";
+      css.href = base + "styles.css";
+      document.head.appendChild(css);
+    })();
+  </script>
 </body>
 </html>
