@@ -1,4 +1,37 @@
-# Phase 3M-L landing-page launch artifact
+# metabrain — static landing synchronization preparation
+
+This repository is the public deploy-only destination. Canonical content and
+the reproducible builder live in `davidhandoko/erp-cloud/marketing/site/` and
+`marketing/scripts/build_pages.py`. The historical instructions below apply
+to that source repository, not this root.
+
+Issue #40 prepares this feature branch only. Do not merge it or change the
+Pages source branch: a main merge may publish automatically. Source/main and
+destination/main were resolved as `88750e1cc8940f9a818a71f8ab609e33ac401fda`
+and `621630225d8d7e59fcda880f39e6410f8c044051` respectively.
+
+The artifact contains metabrain branding and the synthetic Cafe/Resto demo;
+Retail interactive demo remains unavailable. No form, lead intake, analytics,
+tracking, browser storage, gateway, or ERP backend is enabled. CNAME is retained
+unchanged as `erp.metabrain.cloud`; no Pages or DNS setting was changed.
+
+Read [_review/READINESS.md](_review/READINESS.md) for source dependencies,
+domain observations, authorization gates, and rollback. Runtime hashes are in
+`SHA256SUMS`; operator documentation and review/validation files are excluded
+from that runtime manifest. This README preserves the prior operator notes
+below as historical release context.
+
+Validate locally:
+
+```sh
+sha256sum --check SHA256SUMS
+python .github/validation/verify_artifact.py .
+```
+
+The PR-only workflow has read-only repository permission, runs browser/path
+checks and uploads evidence. It contains no Pages deployment action.
+
+## Historical Phase 3M-L operator notes (preserved)
 
 This is the canonical source for the public static Early Access landing page at
 `https://erp.metabrain.cloud/`. It has no active form endpoint, analytics,

@@ -1,0 +1,34 @@
+name: Static readiness (no deployment)
+on:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  static-readiness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Artifact checksums and security contracts
+        run: |
+          sha256sum --check SHA256SUMS
+          python .github/validation/verify_artifact.py .
+      - name: Browser and path verification
+        run: |
+          npm install --prefix "$RUNNER_TEMP/browser-tools" --no-save --package-lock=false playwright@1.51.1
+          PLAYWRIGHT_MODULE="$RUNNER_TEMP/browser-tools/node_modules/playwright" \
+          CHROME_PATH="$(command -v google-chrome || command -v google-chrome-stable)" \
+          node .github/validation/verify_pages.mjs . "$RUNNER_TEMP/browser-evidence"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: landing-readiness-review-evidence
+          path: |
+            ${{ runner.temp }}/browser-evidence/
+            SHA256SUMS
+          if-no-files-found: error
+          retention-days: 30
